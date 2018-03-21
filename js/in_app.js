@@ -22,10 +22,11 @@ function hideAllTabs() {
   $("#more").hide();
 
   for (var hobby in hobbies) {
-    $("#" + hobby + "-show-more").show();
-    $("#" + hobby + "-show-less").hide();
-    $("#" + hobby + "-achievements").hide();
-    $("#" + hobby + "-time-data").hide();
+    var name = hobby.replace(/\s+/g, '');
+    $("#" + name + "-show-more").show();
+    $("#" + name + "-show-less").hide();
+    $("#" + name + "-achievements").hide();
+    $("#" + name + "-time-data").hide();
   }
 
   $("#update-interests").hide()
@@ -127,24 +128,26 @@ function recommendHobby() {
   var hobby_progress = progress_template.content.cloneNode(true);
   hobby_progress.firstElementChild.firstElementChild.innerHTML = hobby_name;
   progress_div.append(hobby_progress);
-  document.getElementById("donut").id = hobby_name + "-donut";
-  document.getElementById("show-more").id = hobby_name + "-show-more";
-  document.getElementById("show-less").id = hobby_name + "-show-less";
-  document.getElementById("time-data").id = hobby_name + "-time-data";
-  document.getElementById("chart").id = hobby_name + "-chart";
-  document.getElementById("type").id = hobby_name + "-type";
-  document.getElementById("update").id = hobby_name + "-update";
-  document.getElementById("achievements").id = hobby_name + "-achievements";
-  document.getElementById("achievements-title").id = hobby_name + "-achievements-title";
-  document.getElementById("achievement-icons").id = hobby_name + "-achievement-icons";
-  createChart(hobby_name);
+  var hobby_id = hobby_name.replace(/\s+/g, '');
+  document.getElementById("donut").id = hobby_id + "-donut";
+  document.getElementById("show-more").id = hobby_id + "-show-more";
+  document.getElementById("show-less").id = hobby_id + "-show-less";
+  document.getElementById("time-data").id = hobby_id + "-time-data";
+  document.getElementById("chart").id = hobby_id + "-chart";
+  document.getElementById("type").id = hobby_id + "-type";
+  document.getElementById("update").id = hobby_id + "-update";
+  document.getElementById("achievements").id = hobby_id + "-achievements";
+  document.getElementById("achievements-title").id = hobby_id + "-achievements-title";
+  document.getElementById("achievement-icons").id = hobby_id + "-achievement-icons";
+  createChart(hobby_id);
 
   var option = new Option(hobby_name);
   $("#selected-hobby").append($(option));
 }
 
-function toggleShow(element, more) {
+function toggleShow(element) {
   var name = element.parentElement.parentElement.firstElementChild.innerHTML;
+  name = name.replace(/\s+/g, '');
   $("#" + name + "-achievements").toggle();
   $("#" + name + "-time-data").toggle();
   $("#" + name + "-show-more").toggle();
