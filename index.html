@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Timely</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Seaweed+Script|Bad+Script|Oswald|PT+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/master.css">
+    <script type="text/javascript" src="js/interests_hobbies.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </head>
+  <body class="text-center">
+
+    <div class="nav-bar">
+      <div class="col-md-4 off off-left"></div>
+      <div class="col-md-4 timely-logo" onclick="toLogIn()">Timely&nbsp;</div>
+      <div class="col-md-4 off off-right"></div>
+    </div>
+
+    <div id="top-lines" class="col-md-4 no-pad text-left">Timely is a platform to help you find new hobbies<br>and get connected with other enthusiasts.<br><br><br><br><p class="text-right">Spend more time productively.</p></div>
+
+    <div class="col-md-4 no-pad">
+      <div class="side-lines"></div>
+      <div id="bl-l-1" class="bottom-lines"></div>
+      <div id="bl-l-2" class="bottom-lines"></div>
+      <div id="bl-l-3" class="bottom-lines-extra"></div>
+    </div>
+
+    <div id="loginbox" class="col-md-4 log-in-box">
+      <button id="login" class="btn btn-primary btn-log-in" onclick="logIn()">LOG IN</button>
+      <button id="signup" class="btn btn-secondary btn-log-in" onclick="signUp()">SIGN UP</button>
+    </div>
+
+    <div id="log-in-box" class="col-md-4 log-in-box">
+      <div class="input">
+        <input placeholder="Username">
+        <input type="password" placeholder="Password">
+      </div>
+      <button id="log-in-continue" class="btn btn-primary btn-log-in" onclick="toInApp()">CONTINUE</button>
+    </div>
+
+    <div id="signupbox" class="col-md-4 log-in-box">
+      <div class="input">
+        <input placeholder="Username">
+        <input type="password" placeholder="Password">
+      </div>
+      <button id="sign-up-continue" class="btn btn-primary btn-log-in" onclick="toSetInterests()">CONTINUE</button>
+    </div>
+
+    <div class="col-md-4 no-pad">
+      <div class="side-lines"></div>
+      <div id="bl-r-1" class="bottom-lines"></div>
+      <div id="bl-r-2" class="bottom-lines"></div>
+      <div id="bl-r-3" class="bottom-lines-extra"></div>
+    </div>
+
+    <div id="bottom" class="col-md-12"></div>
+
+  </body>
+</html>

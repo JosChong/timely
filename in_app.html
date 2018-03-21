@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Timely</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.0.2/jszip-utils.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Oswald|PT+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="css/master.css">
+    <script type="text/javascript" src="js/chart.js"></script>
+    <script type="text/javascript" src="js/interests_hobbies.js"></script>
+    <script type="text/javascript" src="js/in_app.js"></script>
+
+    <link rel="stylesheet/less" type="text/css" href="lib/twitter-bootstrap/lib/bootstrap.less">
+    <!--<script src="lib/less/less-1.1.5.min.js"></script>-->
+
+    <link href="styles.css" rel="stylesheet" />
+    <link href="pusher-chat-widget.css" rel="stylesheet" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://js.pusher.com/3.0/pusher.min.js"></script>
+    <!-- <script src="js/PusherChatWidget.js"></script> -->
+
+    <!-- <script>
+      $(function() {
+        var pusher = new Pusher("PUSHER_APP_KEY");
+        var chatWidget = new PusherChatWidget(pusher, {
+          appendTo: "#pusher_chat_widget"
+        });
+      });
+    </script> -->
+
+  </head>
+  <body class="background">
+
+    <div class="nav-bar forty-four">
+      <div class="wood no-pad"></div>
+      <button id="hobbies-tab" class="tab forty" onclick="openHobbies()">HOBBIES</button>
+      <button id="progress-tab" class="tab forty" onclick="openProgress()">PROGRESS</button>
+      <button id="social-tab" class="tab forty" onclick="openSocial()">FORUMS</button>
+      <button id="options-tab" class="tab forty" onclick="openOptions()">OPTIONS</button>
+      <div class="wood no-pad"></div>
+    </div>
+
+    <div id="hobbies" class="tab-content">
+      <div id="no-hobbies" class="hobby hobby-page">
+        You don't have any hobbies yet. Get a recommendation using the button to the bottom right!
+      </div>
+      <button id="find-hobby" class="btn btn-primary btn-size-L pull-right" onclick="recommendHobby()">FIND A HOBBY</button>
+
+      <template id="hobby-template">
+        <div class="hobby hobby-page th">
+          <div class="inline"></div>
+          <button class="btn btn-primary btn-size-M pull-right" onclick="toggleLearnMore(this)">LEARN</button>
+        </div>
+      </template>
+    </div>
+
+    <div id="more" class="tab-content text-center">
+
+      <div class="col-md-12 hobby shadow">
+
+        <div class="row">
+          <div class="col-sm-3">
+            <button id="return" class="btn btn-secondary btn-size-M pull-left" onclick="toggleLearnMore()">RETURN</button>
+          </div>
+          <div id="more-name" class="col-sm-6" style="border: none; font-size: 60px; font-weight: 900;">
+
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-sm-4 learn-resource" onclick="toggleLearn()">
+            <h2 id="Learning_Resources"><img border="0" alt="Learning Resources" src="images/learningresources.png" width="100" height="100">
+              Resources
+            </h2>
+          </div>
+
+          <div class="col-sm-4 social" onclick="toggleSocial()">
+              <!--<button id="show-more" class="btn btn-primary btn-size-M pull-right" onclick="toggleLearn()">Social</button> -->
+              <h2 id="mysocial"><img border="0" alt="social" src="images/chat.png" width="100" height="100">
+                Chat
+              </h2>
+          </div>
+
+
+          <div class="col-sm-4 my-progress" onclick="openProgress()">
+              <h2 id="myprogress"><img border="0" alt="my_Progress" src="images/Time.png" width="100" height="100">
+                  My Progress
+              </h2>
+          </div>
+
+        </div>
+
+              <div id="introduction" class="row">
+                <div class="col-sm-7">
+                  <h1 style="text-align: left;"><b>Introduction</b></h1>
+                  <p style="text-align: left;"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed placerat et lectus eget placerat.
+                    Curabitur nec eros dapibus, maximus velit in, cursus nisl.
+                    Aenean nec tortor eu turpis porta consectetur.
+                    Mauris porttitor, turpis euismod posuere laoreet, dolor nunc efficitur nisi, non pharetra
+                    ante sapien non leo. Nulla viverra tortor id cursus convallis. Nam facilisis placerat erat,
+                    at hendrerit velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+                    inceptos himenaeos. In venenatis a elit a lobortis. Nam accumsan mattis luctus.
+                  </p>
+
+                </div>
+                <div class="col-sm-4 pull-right">
+
+                  <iframe id="video" width="350" height="250" src=""></iframe>
+                  <!--<video id="video" class="pull-right" width="475" controls>
+                    <source id="more-video" src="videos/slime.mp4" type="video/mp4">
+                      Your browser does not support HTML5 video.
+                    </video>-->
+                  </div>
+                </div>
+
+                <section class="realtime-chat">
+
+                  <div id="pusher_chat_widget">
+
+                    <div id="myDIV" style="font-size:25px; line-height:90%;"></div>
+
+                    <div width="475" >
+                        <div >
+                        <input id="name" type="text" placeholder="Name"  style="width:50%;"  required></input>
+                        </div>
+                        <div >
+                        <input id="item" type="text" placeholder="Comment"  style="width:50%;" required></input>
+                        </div>
+
+                        <button onclick="post()" class="btn btn-primary btn-size-M post">Post</button>
+                    </div>
+
+                  </div>
+
+                </section>
+
+                <h1 id="readings" style="text-align: left;"><b>Readings</b></h1>
+
+                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                  <!-- Indicators -->
+                  <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                  </ol>
+
+                  <!-- Wrapper for slides -->
+                  <div class="carousel-inner">
+                    <div class="item active">
+                      <a href="https://www.google.com"><img class="center-image" id="more-img-1" class="fill-width" src="" alt="resource1"></a>
+                      <div class="carousel-caption">
+                        <h3 id="more-text-1">Getting Started With Coding</h3>
+                      </div>
+                    </div>
+
+                      <div class="item">
+                        <a href="https://www.google.com"><img class="center-image" id="more-img-2" class="fill-width" src="" alt="resource2"></a>
+
+                          <div class="carousel-caption">
+                            <h3 id="more-text-2">Big Coding Experiments</h3>
+
+                          </div>
+                        </div>
+
+                        <div class="item">
+                          <a href="https://www.google.com"><img class="center-image" id="more-img-3" class="fill-width" src="" alt="resource3"></a>
+                            <div class="carousel-caption">
+                              <h3 id="more-text-3">Fun Coding Exercises</h3>
+
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                          <span class="glyphicon glyphicon-chevron-left"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                          <span class="glyphicon glyphicon-chevron-right"></span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </div>
+                      <!-- <button id="show-more" class="btn btn-primary btn-size-M pull-right" onclick="toggleLearn()">LEARN</button> -->
+
+                    </div>
+
+                  </div>
+
+    <div id="progress" class="tab-content">
+      <div id="no-hobbies-progress" class="hobby hobby-page">
+        You don't have any hobbies yet. Head to the hobbies page to get a recommendation!
+      </div>
+
+      <template id="progress-template">
+        <div class="col-md-12 hobby shadow height">
+
+          <div class="col-md-3 hobby-name"></div>
+          <div class="col-md-6 hobby-hours">
+            <canvas id="donut" class="donut"></canvas>
+            <p class="time-spent">0 Achievements<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Earned</p>
+          </div>
+          <div class="col-md-3 show-toggle">
+            <button id="show-more" class="btn btn-primary btn-size-L pull-right" onclick="toggleShow(this, true)">SHOW MORE</button>
+            <button id="show-less" class="btn btn-secondary btn-size-L pull-right show-less" onclick="toggleShow(this, false)">SHOW LESS</button>
+          </div>
+
+          <div id="time-data" class="col-md-12 time-data">
+            <canvas id="chart" class="chart"></canvas>
+            <div class="pull-right">
+              Chart Type:
+              <select id="type">
+                <option value="line">Line</option>
+                <option value="bar">Bar</option>
+              </select>
+              <br>
+              <button id="update" class="btn btn-secondary btn-size-S update">UPDATE</button>
+            </div>
+          </div>
+
+          <div id="achievements" class="col-md-12 text-center achievements">
+            <div id="achievements-title" class="achievements-title">Achievements</div>
+            <img id="achievement-icons" src="images/achievements-2.png">
+          </div>
+
+        </div>
+      </template>
+    </div>
+
+    <div id="social" class="tab-content">
+
+      <div id="no-hobbies-social" class="hobby hobby-page">
+        You don't have any hobbies yet. Head to the hobbies page to get a recommendation!
+      </div>
+
+      <div id="forums">
+
+        <div id="select-hobby" class="col-md-4 col-md-offset-4 text-center">
+          Select Hobby:
+          <select id="selected-hobby"></select>
+        </div>
+
+        <div id="forum-boards" class="hobby">
+
+          <div id="forum-title" class="text-center"></div>
+
+          <div id="forum-nav-bar" class="text-right">
+            <a class="underline" href="#">Friends (0 online)</a>
+            <a class="underline" href="#">Messages</a>
+            <a class="underline" href="#">Inbox (0)</a>
+          </div>
+
+          <div id="new-post" class="text-center">
+            <div class="new-post-text">Title:</div>
+            <input id="new-post-title">
+            <br>
+            <div class="new-post-text">Message:</div>
+            <textarea id="new-post-message"></textarea>
+            <br>
+            <button class="btn btn-primary btn-size-S" onclick="showForums()">POST</button>
+            <br>
+            <button class="btn btn-secondary btn-size-S" onclick="showForums()">CANCEL</button>
+          </div>
+
+          <div id="boards">
+            <div class="section-title">Stickied Posts</div>
+
+            <div class="section-content">
+              <div class="board-post">
+                <a class="post-title forum-link">Rules of this forum</a>
+                <div class="post-content"> List of rules for this forum</div>
+              </div>
+              <div class="board-post">
+                <a class="post-title forum-link">FAQ</a>
+                <div class="post-content">This is the forums FAQ you can find all of the most commonly asked questions here</div>
+              </div>
+              <div class="board-post">
+                <a class="post-title forum-link">What are some more sites for beginner info</a>
+                <div class="post-content">Here are some commonly used sites for more beginner info</div>
+              </div>
+            </div>
+            <div class="section-title">
+              Posts
+              <button id="new-post-button" class="btn btn-primary btn-size-S" onclick="createNewPost()">NEW POST</button>
+            </div>
+            <div class="section-content">
+              <div class="board-post">
+                <a class="post-title forum-link">What are some more sites for intermediate skills</a>
+                <div class="post-content"> Does anyone have any tips for better learning the skill in resource #2</div>
+              </div>
+              <div class="board-post">
+                <a class="post-title forum-link">What are some more sites for advanced info</a>
+                <div class="post-content">
+                    Hey guys! I'm new on the site but i've been in this hobby for a little while. I have already seen alot of the info in the advanced info page and wa wondering if anyone had any links for learning advanced level techniques</div>
+              </div>
+              <div class="board-post">
+                <a class="post-title forum-link">Veterans how did you get the master achievement?</a>
+                <div class="post-content"> I'm at veteran leval and have gotten most achievements. But I still havent unlocked the master acheivement. To those of you who have, how did you do it? </div>
+              </div>
+              <div class="board-post">
+                <a class="post-title forum-link">Where can I buy the cheapist materials</a>
+                <div class="post-content">Anyone know where I can buy cheap materials in bulk online?</div>
+              </div>
+              <div class="board-post">
+                <a class="post-title forum-link">Why is this happening?</a>
+                <div class="post-content">I'm trying to follow a tutorial in one of the beginner resources but I'm notgetting the same results. I'm having trouble with step 3 of one of the tutorials. Can someone elaborat on that step? </div>
+              </div>
+              <div class="board-post">
+                <a class="post-title forum-link">New here saying hi</a>
+                <div class="post-content"> Long time lurker first time poster. Just wanted to say hi to all of you fabulous people! Keep up all the fabulous work.</div>
+              </div>
+            </div>
+
+            <div class="pages text-right">
+              < Page
+              <a href="#" class="underline">1</a>,&nbsp;
+              <a href="#" class="underline">2</a>,&nbsp;
+              <a href="#" class="underline">3</a>,&nbsp;
+              <a href="#" class="underline">4</a>,&nbsp;
+              <a href="#" class="underline">5</a>,&nbsp;
+              ...
+              <a href="#" class="underline">14</a> >
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div id="options" class="tab-content">
+      <div class="col-md-4 col-md-offset-4 options-box text-center">
+        <button class="btn btn-primary btn-size-S btn-wide" onclick="updateInterests()">UPDATE INTERESTS</button>
+        <br>
+        <button class="btn btn-danger btn-size-S btn-wide" onclick="confirmLogOut()">LOG OUT</button>
+      </div>
+    </div>
+
+    <div id="update-interests" class="col-md-12 no-pad text-center">
+      <div id="interests">
+
+        <script type="text/javascript" src="js/interests.js"></script>
+
+        <div class="interest" onclick="toggleSelect(id)" id="board-games">
+          <img class="interest-image" src="images/page-images/chess1.jpg">
+          Board Games
+        </div>
+        <div class="interest" onclick="toggleSelect(id)" id="collecting">
+          <img class="interest-image" src="images/page-images/rock2.jpg">
+          Collecting
+        </div>
+        <div class="interest" onclick="toggleSelect(id)" id="crafts">
+          <img class="interest-image" src="images/page-images/leatherworking1.jpg">
+          Crafts
+        </div>
+        <div class="interest" onclick="toggleSelect(id)" id="food-drink">
+          <img class="interest-image" src="images/page-images/bartending1.jpg">
+          Food/Drink
+        </div>
+
+        <br>
+
+        <div class="interest" onclick="toggleSelect(id)" id="music">
+          <img class="interest-image" src="images/page-images/beatboxing1.jpg">
+          Music
+        </div>
+        <div class="interest" onclick="toggleSelect(id)" id="performing-arts">
+          <img class="interest-image" src="images/page-images/comedy2.jpg">
+          Performing Arts
+        </div>
+        <div class="interest" onclick="toggleSelect(id)" id="pets">
+          <img class="interest-image" src="images/page-images/snake1.jpg">
+          Pets
+        </div>
+        <div class="interest" onclick="toggleSelect(id)" id="rc-models">
+          <img class="interest-image" src="images/page-images/rccar1.jpg">
+          RC Models
+        </div>
+
+        <br>
+
+
+        <div class="interest" onclick="toggleSelect(id)" id="science">
+          <img class="interest-image" src="images/page-images/meteorology1.jpg">
+          Science
+        </div>
+        <div class="interest" onclick="toggleSelect(id)" id="sports-outdoors">
+          <img class="interest-image" src="images/page-images/jian1.jpg">
+          Sports/Outdoors
+        </div>
+        <div class="interest" onclick="toggleSelect(id)" id="technology">
+          <img class="interest-image" src="images/page-images/coding3.jpg">
+          Technology
+        </div>
+        <div class="interest" onclick="toggleSelect(id)" id="visual-arts">
+          <img class="interest-image" src="images/page-images/calligraphy2.jpg">
+          Visual Arts
+        </div>
+
+        <br>
+
+      </div>
+      <button class="btn btn-primary btn-size-M btn-space" onclick="openOptions()">SAVE</button><br>
+      <button class="btn btn-secondary btn-size-M btn-space" onclick="openOptions()">CANCEL</button>
+    </div>
+
+    <div id="confirm-log-out" class="col-md-4 col-md-offset-4 log-out-box text-center">
+      <div class="message">Are you sure you want to log out?</div>
+      <button id="yes" class="btn btn-primary btn-size-S pull-left" onclick="toLogIn()">YES</button>
+      <button id="cancel" class="btn btn-secondary btn-size-S pull-right" onclick="openOptions()">CANCEL</button>
+    </div>
+
+  </body>
+</html>
