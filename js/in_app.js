@@ -221,9 +221,9 @@ function toggleLearnMore(element) {
 
 function setMedia(hobby) {
   var link;
-  var img1 = "images/NoneAvailable.jpg";
-  var img2 = "images/NoneAvailable.jpg";
-  var img3 = "images/NoneAvailable.jpg";
+  var img1 = "images/none-available.jpg";
+  var img2 = "images/none-available.jpg";
+  var img3 = "images/none-available.jpg";
   switch(hobby) {
     case "Go":
       link = "https://www.youtube.com/embed/xMshtO8h7RU";
