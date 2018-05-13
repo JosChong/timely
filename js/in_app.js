@@ -174,10 +174,9 @@ function showHobbySocial() {
 }
 
 function toggleLearn() {
-
   // $("social").toggle();
-
   // document.getElementById("Learning_Resources").style.border = "none";
+  
     // border: solid 4px var(--shadow);
     document.getElementById("mysocial").style.border = "none";
     document.getElementById("Learning_Resources").style.border = "solid 4px var(--shadow)";
