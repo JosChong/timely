@@ -710,6 +710,7 @@ body {
   position: relative;
   top: -162px;
   left: 248px;
+  display: none;
 }
 
 .inline {
